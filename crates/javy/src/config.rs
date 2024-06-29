@@ -38,6 +38,7 @@ bitflags! {
     pub(crate) struct JavyIntrinsics: u32 {
         const STREAM_IO = 1;
         const JSON = 1 << 1;
+        const HELLO = 1 << 2;
     }
 }
 
@@ -176,6 +177,14 @@ impl Config {
     #[cfg(feature = "json")]
     pub fn javy_json(&mut self, enable: bool) -> &mut Self {
         self.javy_intrinsics.set(JavyIntrinsics::JSON, enable);
+        self
+    }
+
+    /// Whether the `Javy.HELLO` intrinsic will be available.
+    /// Disabled by default.
+    // #[cfg(feature = "hello")]
+    pub fn javy_hello(&mut self, enable: bool) -> &mut Self {
+        self.javy_intrinsics.set(JavyIntrinsics::HELLO, enable);
         self
     }
 

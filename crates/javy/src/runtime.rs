@@ -1,7 +1,7 @@
 // use crate::quickjs::JSContextRef;
 use super::from_js_error;
 use crate::{
-    apis::{Console, NonStandardConsole, Random, StreamIO, TextEncoding},
+    apis::{Hello, Console, NonStandardConsole, Random, StreamIO, TextEncoding},
     config::{JSIntrinsics, JavyIntrinsics},
     Config,
 };
@@ -142,6 +142,13 @@ impl Runtime {
                 #[cfg(feature = "json")]
                 unsafe {
                     JavyJson::add_intrinsic(ctx.as_raw())
+                }
+            }
+
+            if javy_intrinsics.contains(JavyIntrinsics::HELLO) {
+                // #[cfg(feature = "json")]
+                unsafe {
+                    Hello::add_intrinsic(ctx.as_raw())
                 }
             }
         });
